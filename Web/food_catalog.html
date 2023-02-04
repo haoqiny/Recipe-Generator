@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Recipe Generator</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- <link rel="stylesheet" type="text/css" href="css/reset.css"> -->
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="css/basic.css">
+        <link rel="stylesheet" type="text/css" href="css/highlight-style.css">
+        <base target="_self">
+    </head>
+    <style>
+        h1{
+          font-family: Georgia;
+        }
+        body {
+          position: relative;
+          padding-top: 75px;
+        }
+  
+        p {
+          font-size: 120%;
+          font-family: times;
+        }
+  
+        form .form-group {
+          margin-bottom: 0px;
+          padding: 0px;
+        }
+  
+        form .control-label {
+          font-size: 120%;
+          margin: 0px;
+          padding-right: 0px;
+        }
+      </style>
+      <body>
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+              <div class="row">
+                <div class="col-lg-10 col-lg-offset-1">
+        
+                  <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="index.html">Recipe Generator</a>
+                  </div>
+                  <div>
+                    <div class="collapse navbar-collapse" id="myNavbar">
+                      <ul class="nav navbar-nav">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="generator.html">Generator</a></li>
+                        <li><a href="ingredient_catalog.html">Ingredients</a></li>
+                        <li><a href="food_catalog.html">Food</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </nav>
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-10 col-lg-offset-1">
+                <h1>Food:</h1>
+      
+                <p>Here are all the food we recognize and the corresponding ingredients:</p>
+      
+                <h4>
+                    <ul id="food_list"></ul>
+                </h4>
+      
+              </div>
+            </div>
+          </div>
+      </body>
+</html>
+
+<script>
+  let food = ['<p>Healthier chicken chow mein<div><image src = "images/1.jpg" width = 360><font class = "notice"><li>noodles</li><li>oil</li><li>powder</li><li>chi\
+cken</li><li>oil</li><li>ginger</li><li>garlic cloves</li><li>mushrooms</li><li>peas</li><li>chicken</li><li>soy sauce</li><li>oyster sauce</li><li>ke\
+cap manis</li><li>beans</li><li>coriander</li><li>chilli</li><li>lime</li></font></p>', '<p>17-minute caesar salad<div><image src = "images/2.jpg" wid\
+th = 360><font class = "notice"><li>prosciutto</li><li>sourdough bread</li><li>butter</li><li>avocado</li><li>egg</li><li>parmesan</li><li>Caesar sala\
+d dressing</li><li>oil</li><li>fresh chives</li><li>salt</li></font></p>', '<p>Swedish meatballs<div><image src = "images/3.jpg" width = 360><font cla\
+ss = "notice"><li>bread</li><li>cream</li><li>pork</li><li>beef</li><li>onion</li><li>egg</li><li>potato</li><li>allspice</li><li>oil</li><li>butter</\
+li><li>flour</li><li>beef</li><li>sauce</li><li>Coles cranberry sauce</li><li>beans</li><li>potato</li><li>dill</li></font></p>', '<p>Mexican zucchini\
+ slice<div><image src = "images/4.jpg" width = 360><font class = "notice"><li>egg</li><li>Mexican spice</li><li>zucchini</li><li>carrot</li><li>green\
+shallots</li><li>peas</li><li>flour</li><li>coriander</li><li>chedder cheese</li><li>avocado</li><li>tomato</li><li>Sriracha</li></font></p>', '<p>Veg\
+an Japanese fried rice<div><image src = "images/5.jpg" width = 360><font class = "notice"><li>miso</li><li>cooking sake</li><li>tonkatsu sauce</li><li\
+>oil</li><li>oil</li><li>onion</li><li>carrot</li><li>mushrooms</li><li>corn</li><li>rice</li><li>cabbage</li><li>edamame</li><li>ginger</li><li>seawe\
+ed</li><li>onion</li><li>seeds</li></font></p>', '<p>Quick 5-a-day carbonara<div><image src = "images/6.jpg" width = 360><font class = "notice"><li>sp\
+aghetti</li><li>oil</li><li>bacon</li><li>broccoli</li><li>asparagus</li><li>noodles</li><li>zucchini noodles</li><li>peas</li><li>egg</li><li>flour</\
+li><li>parmesan</li><li>cream</li></font></p>', '<p>Cheesy beef goulash bake<div><image src = "images/7.jpg" width = 360><font class = "notice"><li>mi\
+so</li><li>cooking sake</li><li>tonkatsu sauce</li><li>oil</li><li>oil</li><li>onion</li><li>carrot</li><li>mushrooms</li><li>corn</li><li>rice</li><l\
+i>cabbage</li><li>edamame</li><li>ginger</li><li>seaweed</li><li>onion</li><li>seeds</li></font></p>', '<p>Prawn cocktail pasta salad<div><image src =\
+ "images/8.jpg" width = 360><font class = "notice"><li>pasta</li><li>prawns</li><li>cucumber</li><li>avocado</li><li>salad</li><li>chives</li><li>mint\
+</li><li>dill</li><li>mayonnaise</li><li>tomato</li><li>lemon</li><li>sauce</li></font></p>', '<p>Tuna mornay with crunchy chip topping<div><image src\
+ = "images/9.jpg" width = 360><font class = "notice"><li>pasta</li><li>corn</li><li>butter</li><li>flour</li><li>milk</li><li>Tuna</li><li>cheddar</li\
+><li>lemon</li><li>chips</li><li>parmesan</li><li>shallots</li></font></p>', '<p>Ready-in-a-flash tuna pasta<div><image src = "images/10.jpg" width =\
+360><font class = "notice"><li>pasta</li><li>prawns</li><li>cucumber</li><li>avocado</li><li>salad</li><li>chives</li><li>mint</li><li>dill</li><li>ma\
+yonnaise</li><li>tomato</li><li>lemon</li><li>sauce</li></font></p>', '<p>Comfort chicken curry<div><image src = "images/11.jpg" width = 360><font cla\
+ss = "notice"><li>onion</li><li>garlic cloves</li><li>ginger</li><li>chilli</li><li>oil</li><li>curry</li><li>chicken</li><li>potato</li><li>stock</li\
+><li>milk</li><li>rice</li><li>chilli</li></font></p>', '<p>Smoked chicken waldorf salad<div><image src = "images/12.jpg" width = 360><font class = "n\
+otice"><li>pecans</li><li>chicken</li><li>avocado</li><li>apples</li><li>sticks</li><li>rocket leaves</li><li>mayonnaise</li><li>oil</li><li>vinegar</\
+li><li>chives</li><li>honey</li><li>pepper</li></font></p>', '<p>Chicken and chickpea tray bake<div><image src = "images/13.jpg" width = 360><font cla\
+ss = "notice"><li>chicken</li><li>chickpeas</li><li>seasoning</li><li>tomato</li><li>spinach</li></font></p>', '<p>Pork san choy bau salad<div><image\
+src = "images/14.jpg" width = 360><font class = "notice"><li>oil</li><li>mushrooms</li><li>pork</li><li>garlic cloves</li><li>ginger</li><li>oyster sa\
+uce</li><li>spinach</li><li>rice</li><li>lettuce</li><li>shallots</li><li>sunflower seeds</li><li>shallots</li><li>mayonnaise</li></font></p>', '<p>Sp\
+eedy tuna risotto<div><image src = "images/15.jpg" width = 360><font class = "notice"><li>oil</li><li>onion</li><li>garlic cloves</li><li>rice</li><li\
+>tomato</li><li>chicken</li><li>peas</li><li>parmesan</li><li>oil</li><li>basil</li></font></p>', '<p>Mongolian lamb stir-fry<div><image src = "images\
+/16.jpg" width = 360><font class = "notice"><li>cornflour</li><li>sugar</li><li>garlic cloves</li><li>sauce</li><li>lamb</li><li>oil</li><li>onion</li\
+><li>lengthways</li><li>broccoli</li><li>beans</li><li>cooking wine</li><li>onion</li><li>rice</li></font></p>', '<p>17-minute one-pan spaghetti bolog\
+naise<div><image src = "images/17.jpg" width = 360><font class = "notice"><li>oil</li><li>pork</li><li>tomato</li><li>wine</li><li>pasta sauce</li><li\
+>rosemary</li><li>stock</li><li>fettuccine</li><li>parsley</li><li>parmesan</li></font></p>', '<p>Sweet and sour pork meatballs<div><image src = "imag\
+es/18.jpg" width = 360><font class = "notice"><li>bread</li><li>milk</li><li>pork</li><li>shallots</li><li>ginger</li><li>garlic cloves</li><li>cornfl\
+our</li><li>egg</li><li>soy sauce</li><li>oil</li><li>onion</li><li>capsicum</li><li>capsicum</li><li>pineapple</li><li>tomato</li><li>vinegar</li><li\
+>sugar</li><li>rice</li></font></p>', '<p>All-in-one-pan beef stroganoff<div><image src = "images/19.jpg" width = 360><font class = "notice"><li>oil</\
+li><li>steak</li><li>onion</li><li>mushrooms</li><li>garlic cloves</li><li>paprika</li><li>sauce</li><li>tomato</li><li>beef</li><li>pasta</li><li>zuc\
+chini</li><li>cream</li><li>parsley</li></font></p>', '<p>Reuben sandwich<div><image src = "images/20.jpg" width = 360><font class = "notice"><li>chee\
+se</li><li>Pastrami</li><li>coleslaw</li><li>thousand island dressing</li></font></p>', '<p>Potato and pea frittata<div><image src = "images/21.jpg" w\
+idth = 360><font class = "notice"><li>potato</li><li>peas</li><li>egg</li><li>cheese</li><li>salad</li></font></p>', '<p>Tomato rainbow pizza<div><ima\
+ge src = "images/22.jpg" width = 360><font class = "notice"><li>yeast</li><li>honey</li><li>oil</li><li>flour</li><li>flakes</li><li>tomato</li><li>oi\
+l</li><li>mozzarella</li><li>parmesan</li></font></p>', '<p>Crispy creamy vegetarian casserole<div><image src = "images/23.jpg" width = 360><font clas\
+s = "notice"><li>oil</li><li>butter</li><li>leek</li><li>garlic cloves</li><li>potato</li><li>stock</li><li>broccoli</li><li>peas</li><li>asparagus</l\
+i><li>fraiche</li><li>parsley</li><li>crackers</li><li>cheese</li></font></p>', '<p>Easy Greek chicken tray bake<div><image src = "images/24.jpg" widt\
+h = 360><font class = "notice"><li>oil</li><li>chicken</li><li>capsicum</li><li>onion</li><li>garlic cloves</li><li>oregano</li><li>bay leaves</li><li\
+>lemon</li><li>tomato</li><li>olives</li><li>fetta</li></font></p>', '<p>Italian-style sausage pasta<div><image src = "images/25.jpg" width = 360><fon\
+t class = "notice"><li>fettuccine</li><li>Sausages</li><li>oil</li><li>parmesan</li><li>basil</li></font></p>', '<p>Cheesy potato bake slice<div><imag\
+e src = "images/26.jpg" width = 360><font class = "notice"><li>butter</li><li>onion</li><li>flour</li><li>milk</li><li>cream</li><li>potato</li><li>gr\
+uyèrea</li><li>parsley</li></font></p>', '<p>Best-ever chilli nachos<div><image src = "images/27.jpg" width = 360><font class = "notice"><li>oil</li>\
+<li>onion</li><li>garlic cloves</li><li>cumin</li><li>coriander</li><li>paprika</li><li>beef</li><li>chipotle</li><li>beans</li><li>lime</li><li>coria\
+nder</li><li>corn</li><li>cheese</li><li>pepper</li><li>cream</li><li>avocado</li><li>tomato</li><li>chilli</li></font></p>', '<p>Quiche Lorraine<div>\
+<image src = "images/28.jpg" width = 360><font class = "notice"><li>flour</li><li>butter</li><li>egg</li><li>onion</li><li>bacon</li><li>cheese</li><l\
+i>cream</li><li>salad</li></font></p>', '<p>One-pan creamy chicken pesto pasta bake<div><image src = "images/29.jpg" width = 360><font class = "notice\
+"><li>oil</li><li>onion</li><li>chicken breast</li><li>garlic cloves</li><li>chicken</li><li>pasta</li><li>Pistachios</li><li>basil</li><li>parsley</l\
+i><li>lemon</li><li>cream</li><li>broccoli</li><li>spinach</li><li>cheese</li></font></p>', '<p>Chicken, pea and sweet potato pot pies<div><image src\
+= "images/30.jpg" width = 360><font class = "notice"><li>oil</li><li>chicken Thigh</li><li>leek</li><li>garlic cloves</li><li>thyme</li><li>potato</li\
+><li>sauce</li><li>peas</li><li>pastry</li><li>egg</li><li>thyme</li></font></p>', '<p>Easy shepherd\'s pie<div><image src = "images/31.jpg" width = 3\
+60><font class = "notice"><li>oil</li><li>onion</li><li>garlic cloves</li><li>carrot</li><li>celery</li><li>rosemary</li><li>lamb</li><li>flour</li><l\
+i>sauce</li><li>tomato</li><li>beef</li><li>potato</li><li>milk</li><li>butter</li></font></p>', '<p>Teriyaki chicken and noodle stir-fry<div><image s\
+rc = "images/32.jpg" width = 360><font class = "notice"><li>sauce</li><li>vinegar</li><li>oil</li><li>sugar</li><li>chicken</li><li>noodles</li><li>oi\
+l</li><li>onion</li><li>sesame</li><li>pak choy</li></font></p>', '<p>Muffin-pan fried rice cups<div><image src = "images/33.jpg" width = 360><font cl\
+ass = "notice"><li>rice</li><li>oil</li><li>onion</li><li>bacon</li><li>wonton</li><li>peas</li><li>corn</li><li>sauce</li><li>egg</li></font></p>', '\
+<p>Mid-week lamb ragu<div><image src = "images/34.jpg" width = 360><font class = "notice"><li>carrot</li><li>onion</li><li>celery</li><li>garlic clove\
+s</li><li>oil</li><li>lamb</li><li>bay leaves</li><li>wine</li><li>tomato</li><li>sugar</li><li>pasta</li><li>parmesan</li><li>herbs</li></font></p>',
+ '<p>Chicken fajita stir-fry<div><image src = "images/35.jpg" width = 360><font class = "notice"><li>oil</li><li>chicken</li><li>onion</li><li>capsicu\
+m</li><li>capsicum</li><li>corn</li><li>fajita</li><li>chipotle</li><li>sauce</li><li>beans</li><li>avocado</li><li>Tortilla</li></font></p>', '<p>Bee\
+f mince rice paper rolls<div><image src = "images/36.jpg" width = 360><font class = "notice"><li>oil</li><li>garlic cloves</li><li>beef</li><li>sugar<\
+/li><li>fish</li><li>pepper</li><li>noodles</li><li>rice</li><li>coleslaw</li><li>mint</li><li>chilli</li><li>sauce</li></font></p>', '<p>Quick chicke\
+n noodle salad<div><image src = "images/37.jpg" width = 360><font class = "notice"><li>noodles</li><li>lime</li><li>oil</li><li>chilli</li><li>sauce</\
+li><li>butter</li><li>chicken</li><li>carrot</li><li>cabbage</li><li>onion</li></font></p>', '<p>Giant cheesy chicken schnitzel<div><image src = "imag\
+es/38.jpg" width = 360><font class = "notice"><li>chicken</li><li>cheddar</li><li>flour</li><li>egg</li><li>Schnitzel</li><li>parmesan</li><li>oil</li\
+><li>lettuce</li><li>tomato</li><li>cucumber</li><li>dressing</li><li>lemon</li></font></p>', '<p>Spanakopita meatloaf<div><image src = "images/39.jpg\
+" width = 360><font class = "notice"><li>spinach</li><li>chicken</li><li>bread</li><li>onion</li><li>garlic cloves</li><li>egg</li><li>dill</li><li>le\
+mon</li><li>fetta</li><li>cheese</li><li>pastry</li><li>butter</li><li>yoghurt</li><li>salad</li></font></p>', '<p>Vegan chilli con ‘carne’<div><image\
+ src = "images/40.jpg" width = 360><font class = "notice"><li>oil</li><li>onion</li><li>mushrooms</li><li>capsicum</li><li>garlic cloves</li><li>papri\
+ka</li><li>cumin</li><li>coriander</li><li>oregano</li><li>tomato</li><li>potato</li><li>zucchini</li><li>beans</li><li>corn</li><li>avocado</li><li>c\
+hilli</li><li>coriander</li><li>lime</li></font></p>', '<p>Apricot chicken kebabs<div><image src = "images/41.jpg" width = 360><font class = "notice">\
+<li>chicken</li><li>apricots</li><li>asparagus</li></font></p>', '<p>Beef mince noodle stir-fry<div><image src = "images/42.jpg" width = 360><font cla\
+ss = "notice"><li>plum</li><li>sauce</li><li>oyster sauce</li><li>sesame</li><li>garlic cloves</li><li>ginger</li><li>oil</li><li>beans</li><li>carrot\
+</li><li>beef</li><li>onion</li><li>noodles</li><li>chilli</li></font></p>', '<p>Giant croque monsieur<div><image src = "images/43.jpg" width = 360><f\
+ont class = "notice"><li>butter</li><li>flour</li><li>milk</li><li>garlic cloves</li><li>bay leaves</li><li>ciabatta</li><li>mustard</li><li>ham</li><\
+li>cheddar</li><li>salad</li></font></p>', '<p>Honey lemon chicken<div><image src = "images/44.jpg" width = 360><font class = "notice"><li>oil</li><li\
+>chicken</li><li>honey</li><li>lemon</li><li>kecap manis</li><li>carrot</li><li>pak choy</li><li>rice</li></font></p>', '<p>Butter chicken<div><image\
+src = "images/45.jpg" width = 360><font class = "notice"><li>yoghurt</li><li>lime</li><li>turmeric</li><li>garam</li><li>chilli</li><li>cumin</li><li>\
+garlic cloves</li><li>ginger</li><li>chicken</li><li>cashews</li><li>butter</li><li>oil</li><li>onion</li><li>cardamom</li><li>cinnamon</li><li>bay le\
+aves</li><li>paprika</li><li>tomato</li><li>chicken</li><li>cream</li><li>rice</li><li>coriander</li></font></p>', '<p>Roast pork spring rolls<div><im\
+age src = "images/46.jpg" width = 360><font class = "notice"><li>noodles</li><li>oil</li><li>onion</li><li>garlic cloves</li><li>ginger</li><li>carrot\
+</li><li>cabbage</li><li>sauce</li><li>pork</li><li>chilli</li></font></p>', '<p>Fish and chips with tartare sauce<div><image src = "images/47.jpg" wi\
+dth = 360><font class = "notice"><li>potato</li><li>oil</li><li>cornflour</li><li>fillets</li><li>lemon</li><li>egg</li><li>mustard</li><li>oil</li><l\
+i>sauce</li><li>baby capers</li><li>corn</li><li>eschalot</li><li>chervil</li><li>parsley</li><li>chives</li><li>flour</li></font></p>', '<p>Chicken K\
+yiv with rocket, capsicum and pine nut salad<div><image src = "images/48.jpg" width = 360><font class = "notice"><li>chicken</li><li>salad</li><li>tom\
+ato</li><li>cucumber</li><li>capsicum</li><li>nuts</li><li>parmesan</li><li>vinegar</li><li>oil</li><li>mustard</li></font></p>', '<p>Steak diane<div>\
+<image src = "images/49.jpg" width = 360><font class = "notice"><li>potato</li><li>oil</li><li>salt</li><li>paprika</li><li>butter</li><li>leek</li><l\
+i>peas</li><li>beef</li><li>garlic cloves</li><li>tomato</li><li>sauce</li><li>cream</li><li>parsley</li></font></p>', '<p>Two-cheese omelette with to\
+mato salad<div><image src = "images/50.jpg" width = 360><font class = "notice"><li>egg</li><li>butter</li><li>fetta</li><li>cheese</li><li>toast</li><\
+li>tomato</li><li>olives</li><li>onion</li><li>parsley</li><li>vinegar</li></font></p>', '<p>Tomato and scrambled eggs<div><image src = "images/51.jpg" width = 360><font class = "notice"><li>tomato</li><li>egg</li><li>oil</li><li>salt</li></font></p>']
+  
+  food.forEach((item) => {
+    document.getElementById('food_list').innerHTML += item;
+  });
+</script>
